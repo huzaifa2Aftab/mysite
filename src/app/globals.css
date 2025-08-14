@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+:root {
+  --background: #030712;
+  --foreground: #e5e7eb;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #030712;
+    --foreground: #e5e7eb;
+  }
+}
+
+html, body {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Animated aurora gradient background */
+.bg-aurora {
+  position: relative;
+  isolation: isolate;
+}
+.bg-aurora::before,
+.bg-aurora::after {
+  content: "";
+  position: fixed;
+  inset: -20% -10% auto -10%;
+  height: 60vh;
+  z-index: -1;
+  background: radial-gradient(60% 60% at 20% 20%, rgba(34,211,238,0.18), transparent),
+              radial-gradient(60% 60% at 80% 10%, rgba(167,139,250,0.16), transparent),
+              radial-gradient(50% 50% at 50% 80%, rgba(52,211,153,0.12), transparent);
+  filter: blur(40px);
+  animation: aurora 18s linear infinite alternate;
+}
+.bg-aurora::after {
+  inset: auto -10% -20% -10%;
+  height: 50vh;
+  animation-duration: 22s;
+}
+
+@keyframes aurora {
+  from { transform: translateY(-5%) scale(1); opacity: 0.9; }
+  to { transform: translateY(5%) scale(1.05); opacity: 1; }
+}
+
+/* Glass card utility */
+.glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+  backdrop-filter: blur(10px);
+}
